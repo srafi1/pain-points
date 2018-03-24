@@ -23,12 +23,12 @@
                         </div>
                         <div id="comment{{ user.id }}" class="panel-heading">
                             {% for comment in user.commentlist %}
-                            <b>{{ comment.user }}:</b> {{ comment.message }}
+                            <b>{{ comment.user }}:</b> {{ comment.message }}<br>
                             {% endfor %}
                         </div>
                         <div class="panel-body">
-                            <input type="text" name="" value="" placeholder="comment" id="text{{ user.id }}">
-                            <input type="submit" name="submit" value="submit" onclick="addCommentToPage({{ user.id }})">
+                            <input type="text" name="" value="" placeholder="comment" id="text{{ user.id }}" onkeyup="event.keyCode== 13 ? addCommentToPage({{ user.id }}) : 'dont'">
+                            <input type="button" value="send" onclick="addCommentToPage({{ user.id }})">
                         </div>
 
                     </div>
