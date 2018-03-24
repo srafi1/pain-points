@@ -121,6 +121,13 @@ def user():
     u = session['user']
     user_info = {"id" : user.id, "username": user.username, "name": user.name, "skills" : user.skills}
     return jsonify({"user_info": user_info})
+@app.route("/user/id/<int:user_id>")
+def profile(user_id):
+    u = User.query.filter_by(id = user_id).first()
+    user_info = {"id" : user.id, "username": user.username, "name": user.name, "skills" : user.skills}
+    return jsonify({"user_info": user_info})
+
+
 
 
 
