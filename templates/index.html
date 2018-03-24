@@ -1,24 +1,75 @@
-<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title></title>
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
-        <link rel="stylesheet" href="/static/css/stylesheet.css"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+  <head>
+    <title>HackNet</title>
+    <link href="/static/css/stylesheet.css" rel="stylesheet">
+  </head>
+  <body>
+    <center>
+      <a href="/" class="invis">
+        <h1>HackNet</h1>
+      </a>
+      <p class="fancy-text">The whole hackathon process streamlined into one website.</p>
+      {% for message in get_flashed_messages() %}
+      <span class="red">{{ message }}</span><br>
+      {% endfor %}
+      <div id="login" class="dark-block">
+        <table>
+          <tr>
+            <td></td>
+            <td><h2>Login</h2></td>
+          </tr>
+          <form action="/login" method="post">
+            <tr>
+              <label>
+                <td>Username:</td> 
+                <td><input type="text" name="username" placeholder="Username" /></td>
+              </label>
+            </tr>
+            <tr>
+              <label>
+                <td>Password:</td> 
+                <td><input type="password" name="password" placeholder="Password" /></td>
+              </label>
+            </tr>
+            <tr>
+              <td></td>
+              <td><input type="submit" name="submit" value="Login" /></td>
+          </form>
+        </table>
+      </div>
 
-    </head>
-    <body>
-        <div  id="app">
-            <div v-for="user in users">
-                <post :person="user.name" :idea="user.idea" :likes="user.likes"></post>
-                <button v-on:click="addlike(user)">Like</button>
-                <comment v-for="comment in user.commentlist" :user="comment.user" :message="comment.message"></comment>
-            </div>
-
-        </div>
-    </body>
-    <script src="/static/js/vue.js" charset="utf-8"></script>
+      <div class="dark-block">
+        <table>
+          <tr>
+            <td></td>
+            <td><h2>Register</h2></td>
+          </tr>
+          <form action="/register" method="post">
+            <tr>
+              <label>
+                <td>Username:</td> 
+                <td><input type="text" name="username" placeholder="Username" /></td>
+              </label>
+            </tr>
+            <tr>
+              <label>
+                <td>Password:</td> 
+                <td><input type="password" name="password1" placeholder="Password" /></td>
+              </label>
+            </tr>
+            <tr>
+              <label>
+                <td>Confirm Password:</td> 
+                <td><input type="password" name="password2" placeholder="Confirm Password" /></td>
+              </label>
+            </tr>
+            <tr>
+              <td></td>
+              <td><input type="submit" name="submit" value="Register" /></td>
+            </tr>
+          </form>
+        </table>
+      </div>
+    </center>
+  </body>
 </html>
