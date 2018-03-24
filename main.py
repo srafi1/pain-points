@@ -43,7 +43,7 @@ def home():
     ]
     print users
     return render_template('feed.html', users=users)
-=======
+
 def index():
     if session.get('user'):
         name = User.query.filter_by(username=session['user']).first().name
@@ -116,8 +116,8 @@ def forum():
 @app.route('/network')
 def network():
     return render_template('network.html')
-@app.route('/user')
-def user():
+#@app.route('/user')
+#def user():
 
 
 if __name__ == '__main__':
