@@ -46,7 +46,7 @@ def home():
 =======
 def index():
     if session.get('user'):
-        name = User.query.filter_by(username=session['user']).first().name 
+        name = User.query.filter_by(username=session['user']).first().name
         print name
         if name == '':
             return redirect('/create_profile')
@@ -112,11 +112,11 @@ def logout():
 @app.route('/forum')
 def forum():
     return render_template('forum.html')
->>>>>>> b3f4eaa1f6f249b4034e5812492e017cd975f591
 
 @app.route('/network')
-def netowrk():
+def network():
     return render_template('network.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
