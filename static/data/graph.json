@@ -1,0 +1,35 @@
+{
+ "name": "User",
+ "children": [
+  {
+   "name": "friendOne",
+   "children": [
+    {
+     "name": "A",
+     "children": [
+      {"name": "One", "size": 3938},
+      {"name": "two", "size": 3812},
+      {"name": "three", "size": 6714},
+      {"name": "four", "size": 743}
+     ]
+    },
+    {
+     "name": "B",
+     "children": [
+      {"name": "five", "size": 3534},
+      {"name": "six", "size": 5731},
+      {"name": "seven", "size": 7840},
+      {"name": "eight", "size": 5914},
+      {"name": "nine", "size": 3416}
+     ]
+    },
+    {
+     "name": "C",
+     "children": [
+      {"name": "ten", "size": 7074}
+     ]
+    }
+   ]
+  }
+ ]
+}
