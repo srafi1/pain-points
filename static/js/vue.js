@@ -1,6 +1,6 @@
 Vue.component('post', {
     props: ['person', 'idea', 'likes'],
-    template: '<div><div>{{ person }} thinks {{ idea }}<br>Likes: {{ likes }}</div></div>'
+    template: '<div class="post-wrapper"><div>{{ person }} thinks {{ idea }}<br>Likes: {{ likes }}</div></div>'
 })
 
 Vue.component('comment', {
@@ -11,8 +11,12 @@ Vue.component('comment', {
 var app = new Vue({
     el: '#app',
     data: {
+        classObject: {
+
+        },
         users: [
             {
+                cl: "post-wrapper",
                 name: "Shaina",
                 likes: 0,
                 idea: "thing",
@@ -34,7 +38,6 @@ var app = new Vue({
     },
     methods: {
       addlike: function(user) {
-          console.log(user);
           user.likes+=1;
       }
     }
