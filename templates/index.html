@@ -1,8 +1,20 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <link href="/static/stylesheet.css" rel="stylesheet">
-  </head>
-  <body>
-    <p>Hi hello good morning</p>
-  </body>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+
+    </head>
+    <body>
+        <div id="app">
+            <div v-for="user in users">
+                <post :person="user.name" :idea="user.idea" :likes="user.likes"></post>
+                <button v-on:click="addlike(user)">Like</button>
+                <comment v-for="comment in user.commentlist" :user="comment.user" :message="comment.message"></comment>
+            </div>
+
+        </div>
+    </body>
+    <script src="vue.js" charset="utf-8"></script>
 </html>
