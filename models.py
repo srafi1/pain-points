@@ -10,7 +10,7 @@ class User(db.Model):
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80))
-    content - db.Column(db.text)
+    content = db.Column(db.text)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __init__(self, username, password):
