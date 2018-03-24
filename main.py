@@ -116,8 +116,13 @@ def forum():
 @app.route('/network')
 def network():
     return render_template('network.html')
-#@app.route('/user')
-#def user():
+@app.route('/user')
+def user():
+    u = session['user']
+    user_info = {"id" : user.id, "username": user.username, "name": user.name, "skills" : user.skills}
+    return jsonify({"user_info": user_info})
+
+
 
 
 if __name__ == '__main__':
