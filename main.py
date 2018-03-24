@@ -16,7 +16,7 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 @app.route('/')
-<<<<<<< HEAD
+
 def home():
 
     users= [
@@ -116,6 +116,8 @@ def forum():
 @app.route('/network')
 def network():
     return render_template('network.html')
+@app.route('/user')
+def user():
 
 
 if __name__ == '__main__':
