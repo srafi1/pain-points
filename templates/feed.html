@@ -4,53 +4,79 @@
     <meta charset="utf-8">
     <title>Feed</title>
     <link href="/static/favicon.ico" rel="icon">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="/static/js/feed.js" charset="utf-8"></script>
     <link href="/static/css/stylesheet.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
   </head>
   <body>
     <center>
       <a href="/" class="invis">
         <h1>IdeaCloud</h1>
       </a>
-    </center>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8">
-          <div class="panel-group">
-            {% for user in users %}
-            <div class="panel panel-default" id="{{ user.id }}">
-              <div class="panel-heading">
-                {{ user.name }}
-              </div>
-              <div class="panel-body">
-                {{ user.idea }}
-              </div>
-              <div id="comment{{ user.id }}" class="panel-heading">
-                {% for comment in user.commentlist %}
-                <b>{{ comment.user }}:</b> {{ comment.message }}<br>
-                {% endfor %}
-              </div>
-              <div class="panel-body">
-                <input type="text" name="" value="" placeholder="comment" id="text{{ user.id }}" onkeyup="event.keyCode== 13 ? addCommentToPage({{ user.id }}) : 'dont'">
-                <input type="button" value="send" onclick="addCommentToPage({{ user.id }})">
-              </div>
 
+      <div class="post">
+        <center>
+        <form action="/new_post" method="post">
+          <h3>Enter your idea</h3>
+          <textarea name="content" rows="8" cols="60"></textarea>
+          <br>
+          <input type="submit" name="submit" value="submit">
+        </form>
+        </center>
+      </div>
+
+      {% raw %}
+      <div id="app">
+        <div v-for="post in posts">
+          <div class="post" v-model="post">
+            <h4>{{ post.name }}</h4>
+            <div class="post-content">
+              {{ post.idea }}
             </div>
-            {% endfor %}
+            <br>
+            Likes: {{ post.likes }}
+            <button @click="addlike(post)">Like</button>
+            <br>
+            <div class="comment" v-for="comment in post.commentlist">
+              <b>{{ comment.user }}</b>: {{ comment.message }}
+            </div>
+            <div>
+              <input type="text" v-model="post.dummy" @keyup.enter="addComment(post)" placeholder="Comment" style="width: 100%;"/>
+            </div>
           </div>
         </div>
-        <div class="col-sm-2"></div>
       </div>
-    </div>
+      {% endraw %}
 
+    </center>
+
+    <script type="text/javascript">
+var posts = {{ posts | safe }};
+var app = new Vue({
+    el: '#app',
+    data: {
+        classObject: {
+        },
+        posts: posts,
+    },
+    methods: {
+        addlike: function(user) {
+            user.likes+=1;
+        },
+        addPost: function(content) {
+            posts.push({
+                name: 'You',
+                idea: content,
+                likes: 0,
+                commentlist: []
+            });
+        },
+        addComment: function(post) {
+            post.commentlist.push({user: 'You', message: post.dummy});
+            post.dummy = '';
+        }
+    }
+})
+    </script>
   </body>
-  <style media="screen">
-h6 {
-  font-weight: bold;
-}
-  </style>
 </html>
+

@@ -1,10 +1,3 @@
-var addCommentToPage = function(id) {
-    comments = document.getElementById('comment'+id);
-    text = document.getElementById('text'+id);
-    comments.innerHTML+= "<b>You: </b>"+ text.value + "<br>";
-    text.value="";
-}
-
 var app = new Vue({
     el: '#app',
     data: {
@@ -13,7 +6,6 @@ var app = new Vue({
         posts: [
             {
                 id: 0,
-                cl: "post-wrapper",
                 name: "Shaina",
                 likes: 0,
                 idea: "thing",

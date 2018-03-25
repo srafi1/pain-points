@@ -12,7 +12,6 @@ class User(db.Model):
     name = db.Column(db.String(40))
     skills = db.Column(db.String(300))
     posts = db.relationship('Post', backref='user', lazy=True)
-    comments = db.relationship('Comment', backref='user', lazy=True)
     hackathons = db.relationship('Hackathon', secondary=association_table, backref='user', lazy=True)
 
     def __init__(self, username, password):
@@ -25,33 +24,37 @@ class User(db.Model):
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    name = db.Column(db.Integer, db.ForeignKey('user.name'))
+    likes = db.Column(db.Integer)
     hackathon_id = db.Column(db.Integer, db.ForeignKey('hackathon.id'))
-    title = db.Column(db.String(80))
-    content = db.Column(db.String(500))
-    comments = db.relationship('Comment', backref='post.id', lazy=True)
+    idea = db.Column(db.String(500))
+    commentlist = db.relationship('Comment', backref='post.id', lazy=True)
 
-    def __init__(self, user_id, title, content):
-        self.user_id = user_id
-        self.title = title
-        self.content = content
+    def __init__(self, name, hackathon_id, content):
+        self.name = name
+        self.hackathon_id = hackathon_id
+        self.idea = content
+        self.likes = 0
+        self.commentlist = []
 
     def __repr__(self):
-        return '<Post %r>' % self.title
+        ret = {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        ret['commentlist'] = self.commentlist
+        return str(ret)
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.Column(db.Integer, db.ForeignKey('user.name'))
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
-    content = db.Column(db.String(500))
+    message = db.Column(db.String(500))
 
-    def __init__(self, user_id, post_id, content):
-        self.user_id = user_id
+    def __init__(self, user, post_id, content):
+        self.user= user
         self.post_id = post_id
-        self.content = content
+        self.message = content
 
     def __repr__(self):
-        return '<Comment %r>' % self.content
+        return str({user:self.user, message:self.message})
 
 class Hackathon(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -117,7 +117,7 @@ def sign_out():
 
 @app.route('/feed')
 def feed():
-    users= [
+    posts= [
         {
             'name': "Shaina",
             'likes': 0,
@@ -139,8 +139,8 @@ def feed():
             ]
         }
     ]
-    print users
-    return render_template('feed2.html', users=users)
+
+    return render_template('feed.html', posts=posts)
 
 @app.route('/forum')
 def forum():
@@ -189,15 +189,13 @@ def comments(post_id):
         comments.append(comment_info)
     return jsonify({"comments": comments})
 
-@app.route('/pitch')
-def pitch():
-    return render_template('pitch.html')
-
-
-
-
-
-
+@app.route("/new_post", methods=["POST"])
+def new_post():
+    content = request.form.get('content')
+    post = Post(session['user'], session['hackathon'], content)
+    db.session.add(post)
+    db.session.commit()
+    return redirect('/feed')
 
 if __name__ == '__main__':
     app.run(debug=True)
