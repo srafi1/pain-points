@@ -12,6 +12,7 @@ class Post(db.Model):
     title = db.Column(db.String(80))
     content = db.Column(db.String(500))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+#class Comments(db.Model):
 
     def __init__(self, username, password):
         self.username = username
