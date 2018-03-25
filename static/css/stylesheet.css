@@ -91,3 +91,7 @@ a.invis {
   background-color: #97caef;
   width: 600px;
 }
+
+.link:hover {
+  background-color: #aaa;
+}
