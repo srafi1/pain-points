@@ -19,7 +19,6 @@ def page_not_found(e):
 def index():
     if session.get('user'):
         name = User.query.filter_by(username=session['user']).first().name
-        print name
         if name == '':
             return redirect('/create_profile')
         else:
@@ -45,13 +44,10 @@ def register():
         flash('Username should not be empty')
         valid = False
     if valid:
-        print 'creating user:', user, password1, password2
         new_user = User(user, password1)
         db.session.add(new_user)
         db.session.commit()
         session['user'] = user
-    else:
-        print 'invalid register'
     return redirect('/')
 
 @app.route('/create_profile', methods=['GET', 'POST'])
