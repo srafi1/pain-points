@@ -7,12 +7,18 @@ class User(db.Model):
     name = db.Column(db.String(30))
     skills = db.Column(db.String(300))
     posts = db.relationship('Post',backref='user', lazy=True)
+    comments = db.relationship('Comment',backref='user', lazy=True)
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80))
     content = db.Column(db.String(500))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-#class Comments(db.Model):
+    comments = db.relationship('Comment',backref='post', lazy=True)
+class Comments(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    content = db.Column(db.String(500))
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
 
     def __init__(self, username, password):
         self.username = username
