@@ -126,6 +126,25 @@ def profile(user_id):
     u = User.query.filter_by(id = user_id).first()
     user_info = {"id" : user.id, "username": user.username, "name": user.name, "skills" : user.skills}
     return jsonify({"user_info": user_info})
+@app.route("/user/posts")
+def posts():
+    user = session['user']
+    posts_info = []
+    for post in user.posts.all():
+        post_info = {"id" : post.id, "title": post.title, "content": post.content}
+        posts_info.append(post_info)
+    return jsonify({"posts_info": posts_info})
+
+@app.route("/user/id/<int:user_id>/posts")
+def user_posts(user_id):
+    user = User.query.filter_by(id = user_id).first()
+    posts_info = []
+    for post in user.posts.all():
+        post_info = {"id" : post.id, "title": post.title, "content": post.content}
+        posts_info.append(post_info)
+    return jsonify({"posts_info": posts_info})
+
+
 
 
 
