@@ -149,6 +149,15 @@ def user_posts(user_id):
         post_info = {"id" : post.id, "title": post.title, "content": post.content}
         posts_info.append(post_info)
     return jsonify({"posts_info": posts_info})
+@app.route("/post/<int:post_id>/comments")
+def comments(post_id):
+    post = Post.query.filter_by(id = post_id).first()
+    comments = []
+    for comment in post.comments.all():
+        comment_info = {"id": comment.id, "user_id": comment.user_id, "content":comment.content}
+        comments.append(comment_info)
+    return jsonify({"comments": comments})
+
 
 
 
