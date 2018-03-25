@@ -2,4 +2,6 @@ Flask==0.12.2
 Werkzeug<0.13.0,>=0.12.0
 Flask-SQLAlchemy==1.0
 SQLAlchemy==1.0.8
-
+mock
+gevent
+gunicorn
