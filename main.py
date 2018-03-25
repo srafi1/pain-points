@@ -140,6 +140,9 @@ def feed():
         }
     ]
 
+    posts = Post.query.all()
+    posts = str(posts).replace("u'", "'")
+
     return render_template('feed.html', posts=posts)
 
 @app.route('/forum')
