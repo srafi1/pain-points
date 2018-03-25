@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <title>HackNet</title>
+    <link href="/static/css/stylesheet.css" rel="stylesheet">
+    <link href="/static/favicon.ico" rel="icon">
+  </head>
+  <body>
+    <center>
+      <a href="/" class="invis">
+        <h1>HackNet</h1>
+      </a>
+      <p class="fancy-text">Choose a hackathon to sign into or add a hackathon to the list</p>
+      {% for message in get_flashed_messages() %}
+      <span class="red">{{ message }}</span><br>
+      {% endfor %}
+
+      <div>
+        <div id="login" class="dark-block">
+          <h2>Sign in</h2>
+          <br>
+          {% if not hackathons %}
+          No hackathons yet
+          {% endif %}
+          {% for hackathon in hackathons %}
+          <a class="button" href="/sign_in/{{ hackathon.id }}">{{ hackathon.name }}</a><br><br>
+          {% endfor %}
+        </div>
+
+        <div class="dark-block">
+          <table>
+            <tr>
+              <td></td>
+              <td><h2>Add a hackathon</h2></td>
+            </tr>
+            <form action="/home" method="post">
+              <tr>
+                <label>
+                  <td>Hackathon name:</td> 
+                  <td><input type="text" name="hackathon" placeholder="Hackathon name" /></td>
+                </label>
+              </tr>
+              <tr>
+                <td></td>
+                <td><input class="button" type="submit" name="submit" value="Submit" /></td>
+              </tr>
+            </form>
+          </table>
+          {% for hackathon in hackathons %}
+          <br>
+          {% endfor %}
+        </div>
+      </div>
+    </center>
+  </body>
+</html>
+

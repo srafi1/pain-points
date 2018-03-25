@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Feed</title>
+    <link href="/static/favicon.ico" rel="icon">
+    <link href="/static/css/stylesheet.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+  </head>
+  <body>
+    <center>
+      <a href="/" class="invis">
+        <h1>HackNet</h1>
+      </a>
+
+      {% raw %}
+      <div id="app">
+        <div v-for="post in posts">
+          <div class="post" v-model="post">
+            <h4>{{ post.name }}</h4>
+            <div class="post-content">
+              {{ post.idea }}
+            </div>
+            <br>
+            Likes: {{ post.likes }}
+            <button @click="addlike(post)">Like</button>
+            <br>
+            <div class="comment" v-for="comment in post.commentlist">
+              <b>{{ comment.user }}</b>: {{ comment.message }}
+            </div>
+            <div>
+              <input type="text" v-model="post.dummy" @keyup.enter="addComment(post)" placeholder="Comment" style="width: 100%;"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endraw %}
+
+    </center>
+
+    <script src="/static/js/feed.js" charset="utf-8"></script>
+  </body>
+</html>
+

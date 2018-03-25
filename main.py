@@ -85,11 +85,38 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.pop('user')
+    if session.get('user'):
+        session.pop('user')
+    if session.get('hackathon'):
+        session.pop('hackathon')
     return redirect('/')
 
-@app.route('/feed')
+@app.route('/home', methods=['GET', 'POST'])
 def home():
+    if request.method == 'POST':
+        hackathon_name = request.form.get('hackathon')
+        if hackathon_name:
+            h = Hackathon(hackathon_name)
+            db.session.add(h)
+            db.session.commit()
+    hackathon = session.get('hackathon')
+    if hackathon:
+        return redirect('/feed')
+    hackathons = Hackathon.query.filter_by().all()
+    return render_template('choose_hackathon.html', hackathons=hackathons)
+
+@app.route('/sign_in/<int:hackathon_id>')
+def sign_in(hackathon_id):
+    session['hackathon'] = hackathon_id
+    return redirect('/feed')
+
+@app.route('/sign_out')
+def sign_out():
+    session.pop('hackathon')
+    return redirect('/home')
+
+@app.route('/feed')
+def feed():
     users= [
         {
             'name': "Shaina",
@@ -113,7 +140,7 @@ def home():
         }
     ]
     print users
-    return render_template('feed.html', users=users)
+    return render_template('feed2.html', users=users)
 
 @app.route('/forum')
 def forum():
@@ -122,16 +149,19 @@ def forum():
 @app.route('/network')
 def network():
     return render_template('network.html')
+
 @app.route('/user')
 def user():
     u = session['user']
     user_info = {"id" : user.id, "username": user.username, "name": user.name, "skills" : user.skills}
     return jsonify({"user_info": user_info})
+
 @app.route("/user/id/<int:user_id>")
 def profile(user_id):
     u = User.query.filter_by(id = user_id).first()
     user_info = {"id" : user.id, "username": user.username, "name": user.name, "skills" : user.skills}
     return jsonify({"user_info": user_info})
+
 @app.route("/user/posts")
 def posts():
     user = session['user']
@@ -149,6 +179,7 @@ def user_posts(user_id):
         post_info = {"id" : post.id, "title": post.title, "content": post.content}
         posts_info.append(post_info)
     return jsonify({"posts_info": posts_info})
+
 @app.route("/post/<int:post_id>/comments")
 def comments(post_id):
     post = Post.query.filter_by(id = post_id).first()

@@ -1,47 +1,56 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Feed</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="/static/js/feed.js" charset="utf-8"></script>
-    </head>
-    <body>
-        <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8">
-                <div class="panel-group">
-                    {% for user in users %}
-                    <div class="panel panel-default" id="{{ user.id }}">
-                        <div class="panel-heading">
-                            {{ user.name }}
-                        </div>
-                        <div class="panel-body">
-                            {{ user.idea }}
-                        </div>
-                        <div id="comment{{ user.id }}" class="panel-heading">
-                            {% for comment in user.commentlist %}
-                            <b>{{ comment.user }}:</b> {{ comment.message }}<br>
-                            {% endfor %}
-                        </div>
-                        <div class="panel-body">
-                            <input type="text" name="" value="" placeholder="comment" id="text{{ user.id }}" onkeyup="event.keyCode== 13 ? addCommentToPage({{ user.id }}) : 'dont'">
-                            <input type="button" value="send" onclick="addCommentToPage({{ user.id }})">
-                        </div>
+  <head>
+    <meta charset="utf-8">
+    <title>Feed</title>
+    <link href="/static/favicon.ico" rel="icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/static/js/feed.js" charset="utf-8"></script>
+    <link href="/static/css/stylesheet.css" rel="stylesheet">
+  </head>
+  <body>
+    <center>
+      <a href="/" class="invis">
+        <h1>HackNet</h1>
+      </a>
+    </center>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+          <div class="panel-group">
+            {% for user in users %}
+            <div class="panel panel-default" id="{{ user.id }}">
+              <div class="panel-heading">
+                {{ user.name }}
+              </div>
+              <div class="panel-body">
+                {{ user.idea }}
+              </div>
+              <div id="comment{{ user.id }}" class="panel-heading">
+                {% for comment in user.commentlist %}
+                <b>{{ comment.user }}:</b> {{ comment.message }}<br>
+                {% endfor %}
+              </div>
+              <div class="panel-body">
+                <input type="text" name="" value="" placeholder="comment" id="text{{ user.id }}" onkeyup="event.keyCode== 13 ? addCommentToPage({{ user.id }}) : 'dont'">
+                <input type="button" value="send" onclick="addCommentToPage({{ user.id }})">
+              </div>
 
-                    </div>
-                    {% endfor %}
-                </div>
             </div>
-            <div class="col-sm-2"></div>
+            {% endfor %}
+          </div>
         </div>
+        <div class="col-sm-2"></div>
+      </div>
+    </div>
 
-    </body>
-    <style media="screen">
-        h6 {
-            font-weight: bold;
-        }
-    </style>
+  </body>
+  <style media="screen">
+h6 {
+  font-weight: bold;
+}
+  </style>
 </html>

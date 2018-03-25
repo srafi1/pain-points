@@ -1,59 +1,94 @@
 body {
-    background-color: #8A2BE2;
-    color: white;
-    font-family: Roboto;
+  background-color: #8A2BE2;
+  color: white;
+  font-family: Roboto;
 }
 
 @font-face {
-    font-family: "Yanone Kaffeesatz";
-    src: url("/static/fonts/YanoneKaffeesatz-Regular.ttf");
+  font-family: "Yanone Kaffeesatz";
+  src: url("/static/fonts/YanoneKaffeesatz-Regular.ttf");
 }
 
 @font-face {
-    font-family: "Anonymous Pro";
-    src: url("/static/fonts/AnonymousPro-Regular.ttf");
+  font-family: "Anonymous Pro";
+  src: url("/static/fonts/AnonymousPro-Regular.ttf");
 }
 
 @font-face {
-    font-family: "Roboto";
-    src: url("/static/fonts/Roboto-Regular.ttf");
+  font-family: "Roboto";
+  src: url("/static/fonts/Roboto-Regular.ttf");
 }
 
 h1 {
-    font-family: "Yanone Kaffeesatz";
-    font-size: 56px;
+  font-family: "Yanone Kaffeesatz";
+  font-size: 56px;
 }
 
 h2 {
-    font-family: "Yanone Kaffeesatz";
-    font-size: 36px;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
+  font-family: "Yanone Kaffeesatz";
+  font-size: 36px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 #login {
-    border-right: 1px solid white;
+  border-right: 1px solid white;
 }
 
 .post-wrapper {
-    border: 1px solid black;
+  border: 1px solid black;
 }
 
 .dark-block {
-    display: inline-block;
-    padding: 10px;
+  display: inline-block;
+  padding: 10px;
 }
 
 .fancy-text {
-    font-size: 18px;
-    font-family: "Anonymous Pro";
+  font-size: 18px;
+  font-family: "Anonymous Pro";
 }
 
 .red {
-    color: #f22;
+  color: #f22;
 }
 
 a.invis {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
+}
+
+.button {
+  font-family: Roboto;
+  font-size: 18px;
+  background-color: #BA55D3;
+  border: none;
+  padding: 5px;
+  margin: 5px;
+  text-decoration: none;
+  color: white;
+}
+
+.post {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #DDA0DD;
+  width: 600px;
+  text-align: left;
+}
+
+.post-content {
+  padding: 5px;
+}
+
+.post h4 {
+  padding: 0px;
+  margin: 0px;
+  text-align: center;
+  padding: 5px;
+}
+
+.comment {
+  background-color: #DD82EE;
+  width: 600px;
 }
