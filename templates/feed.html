@@ -41,7 +41,7 @@
             </div>
             <br>
             Likes: {{ post.likes }}
-            <button @click="addlike(post)">Like</button>
+            <button class="button" @click="addlike(post)">Like</button>
             <br>
             <div class="comment" v-for="comment in post.commentlist">
               <b>{{ comment.user }}</b>: {{ comment.message }}

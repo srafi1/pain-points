@@ -94,4 +94,5 @@ a.invis {
 
 .link:hover {
   background-color: #aaa;
+  cursor: pointer;
 }
