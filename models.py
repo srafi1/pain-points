@@ -1,4 +1,4 @@
-from main import db
+from app import db
 
 association_table = db.Table('association', db.Model.metadata,
     db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
