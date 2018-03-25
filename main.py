@@ -152,7 +152,9 @@ def comments(post_id):
         comments.append(comment_info)
     return jsonify({"comments": comments})
 
-
+@app.route('/pitch')
+def pitch():
+    return render_template('pitch.html')
 
 
 
