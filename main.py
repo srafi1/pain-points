@@ -16,34 +16,6 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 @app.route('/')
-
-def home():
-
-    users= [
-        {
-            'name': "Shaina",
-            'likes': 0,
-            'id':0,
-            'idea': "Ad ea velit deserunt irure esse minim proident ut adipisicing irure ex adipisicing consectetur et ipsum labore deserunt. Est anim enim amet cupidatat ad consequat irure ad do consectetur quis dolor nostrud est qui. Tempor amet sint culpa et culpa duis sint esse laborum duis eiusmod. Esse enim proident enim eu aliquip do ea anim culpa tempor. Qui exercitation quis fugiat enim amet mollit officia ullamco. Est sit cillum tempor sit excepteur irure anim ad occaecat.",
-            'commentlist': [
-                {'user': 'comm', 'message':'idk'},
-                {'user': 'comm2', 'message':'idk as well'}
-            ]
-        },
-        {
-            'name': "Shakil",
-            'likes': 0,
-            'id':1,
-            'idea': "thing2",
-            'commentlist': [
-                {'user': 'comm3', 'message':'idk and'},
-                {'user': 'comm4', 'message':'idk or'}
-            ]
-        }
-    ]
-    print users
-    return render_template('feed.html', users=users)
-
 def index():
     if session.get('user'):
         name = User.query.filter_by(username=session['user']).first().name
@@ -87,10 +59,17 @@ def create_profile():
     if request.method == 'POST':
         name = request.form.get('name')
         skills = request.form.get('skills')
+        valid = True
         if name == '':
             flash('Fill out your name')
-        if skills == '':
-            flash('Fill out your skills')
+            valid = False
+        if valid:
+            u = User.query.filter_by(username=session['user']).first()
+            u.name = name
+            u.skills = skills
+            db.session.add(u)
+            db.session.commit()
+            return redirect('/')
     return render_template('create_profile.html')
 
 @app.route('/login', methods=['POST'])
@@ -108,6 +87,33 @@ def login():
 def logout():
     session.pop('user')
     return redirect('/')
+
+@app.route('/feed')
+def home():
+    users= [
+        {
+            'name': "Shaina",
+            'likes': 0,
+            'id':0,
+            'idea': "Ad ea velit deserunt irure esse minim proident ut adipisicing irure ex adipisicing consectetur et ipsum labore deserunt. Est anim enim amet cupidatat ad consequat irure ad do consectetur quis dolor nostrud est qui. Tempor amet sint culpa et culpa duis sint esse laborum duis eiusmod. Esse enim proident enim eu aliquip do ea anim culpa tempor. Qui exercitation quis fugiat enim amet mollit officia ullamco. Est sit cillum tempor sit excepteur irure anim ad occaecat.",
+            'commentlist': [
+                {'user': 'comm', 'message':'idk'},
+                {'user': 'comm2', 'message':'idk as well'}
+            ]
+        },
+        {
+            'name': "Shakil",
+            'likes': 0,
+            'id':1,
+            'idea': "thing2",
+            'commentlist': [
+                {'user': 'comm3', 'message':'idk and'},
+                {'user': 'comm4', 'message':'idk or'}
+            ]
+        }
+    ]
+    print users
+    return render_template('feed.html', users=users)
 
 @app.route('/forum')
 def forum():
