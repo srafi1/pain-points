@@ -1,32 +1,42 @@
 {
  "name": "User",
+ "skills": "Python, HTML, Javascript",
+ "hackathons": "hackNYU, Stuyhacks",
  "children": [
   {
    "name": "friendOne",
+   "skills": "Python, HTML, Javascript",
+   "hackathons": "hackNYU, Stuyhacks",
    "children": [
     {
      "name": "A",
+     "skills": "Python, HTML, Javascript",
+     "hackathons": "hackNYU, Stuyhacks",
      "children": [
-      {"name": "One", "size": 3938},
-      {"name": "two", "size": 3812},
-      {"name": "three", "size": 6714},
-      {"name": "four", "size": 743}
+      {"name": "One", "size": 3938, "skills":"Python", "hackathons": "hackNYU"},
+      {"name": "two", "size": 3812, "skills":"Python", "hackathons": "hackNYU"},
+      {"name": "three", "size": 6714, "skills":"Python", "hackathons": "hackNYU"},
+      {"name": "four", "size": 743, "skills":"Python", "hackathons": "hackNYU"}
      ]
     },
     {
      "name": "B",
+     "skills": "Python, HTML, Javascript",
+     "hackathons": "hackNYU, Stuyhacks",
      "children": [
-      {"name": "five", "size": 3534},
-      {"name": "six", "size": 5731},
-      {"name": "seven", "size": 7840},
-      {"name": "eight", "size": 5914},
-      {"name": "nine", "size": 3416}
+      {"name": "five", "size": 3534, "skills":"Python", "hackathons": "hackNYU"},
+      {"name": "six", "size": 5731, "skills":"Python", "hackathons": "hackNYU"},
+      {"name": "seven", "size": 7840, "skills":"Python", "hackathons": "hackNYU"},
+      {"name": "eight", "size": 5914, "skills":"Python", "hackathons": "hackNYU"},
+      {"name": "nine", "size": 3416, "skills":"Python", "hackathons": "hackNYU"}
      ]
     },
     {
      "name": "C",
+     "skills": "Python, HTML, Javascript",
+     "hackathons": "hackNYU, Stuyhacks",
      "children": [
-      {"name": "ten", "size": 7074}
+      {"name": "ten", "size": 7074,"skills":"Python", "hackathons": "hackNYU"}
      ]
     }
    ]
