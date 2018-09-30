@@ -9,7 +9,7 @@ app.config['SECRET_KEY'] = 'whomst gonn guess this?'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.db')
 db = SQLAlchemy(app)
 from models import *
-db.create_all();
+db.create_all()
 
 @app.errorhandler(404)
 def page_not_found(e):
